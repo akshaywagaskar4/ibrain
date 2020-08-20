@@ -17,8 +17,11 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     @Query("SELECT MONTH(a.apptdate) AS apptdate, COUNT(a.apptdate) AS count FROM Appointment AS a GROUP BY MONTH(a.apptdate) ORDER BY a.clinicid DESC")
     List<Object[]> countAppointmentByMonth();
 
-   // @Query("select a.patid from appointment a  where a.patid  IN  (select an.patid from appointment an )")
-   // List<Object> countAppointmentByPat();
+   // @Query("SELECT a.patid FROM appointment a  where a.patid  IN  (select an.patid from appointment an )")
+   // @Query(value = "select a from  appointment a where a.patid IN (Select a. patid from  appointment a where apptdate >= CURDATE()", nativeQuery = true)
+    //@Query("SELECT a FROM appointment a WHERE a.patid NOT IN (SELECT a.patid  FROM appointment where a.apptdate >= CURDATE)")
+      @Query("SELECT a.patid FROM Appointment a  where a.patid  NOT IN  (select an.patid from Appointment an where an.apptdate >= CURDATE())")
+ List<Object[]> countAppointmentByPat();
 
 }
 

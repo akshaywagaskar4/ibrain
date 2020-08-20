@@ -7,12 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="akshay-demo" />
+        <module name="springboot-registration-login" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="akshay-demo" options="-parameters" />
+      <module name="springboot-registration-login" options="-parameters" />
     </option>
   </component>
 </project>

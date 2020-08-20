@@ -4,8 +4,10 @@ import com.akshay.hospital.model.AppointmentByClinic;
 import com.akshay.hospital.model.Clinic;
 import com.akshay.hospital.repository.AppointmentRepository;
 import com.akshay.hospital.repository.ClinicRepository;
+import com.akshay.hospital.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,12 +15,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class AppointmentService {
     @Autowired
     AppointmentRepository appointmentRepository;
 
     @Autowired
     ClinicRepository clinicRepository;
+
+    @Autowired
+    PatientRepository patientRepository;
 
     public List<AppointmentByClinic> countTotalByClinic() {
         List<Object[]> list = appointmentRepository.countTotalByClinic();
@@ -63,10 +69,14 @@ public class AppointmentService {
         }
         return yearMap;
     }
-//    public HashMap countAppointmentByPat() {
-//        HashMap patMap=new HashMap();
-//        Object obj = appointmentRepository.countAppointmentByPat();
-//        System.out.println(" OBJ "+obj.toString());
-//        return patMap;
-//    }
+    public List countAppointmentByPat() {
+        List dataList=new ArrayList();
+        List<Object[]> list = appointmentRepository.countAppointmentByPat();
+        for (Object[] ob : list) {
+           //  Patient   patient = patientRepository.getOne((Long) ob[0]);
+          //  System.out.println(patient);
+            dataList.add((Long) ob[0]);
+        }
+        return dataList;
+    }
 }

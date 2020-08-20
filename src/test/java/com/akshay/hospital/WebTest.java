@@ -21,14 +21,14 @@ public class WebTest {
 
     @Test
     public void contextLoads() {
-        System.out.println(" ----  Data Count by clinic -----");
+        System.out.println(" ----  List of appointments by a clinic -----");
          countByClinic();
-        System.out.println(" ----  Data Count by Year -----");
+        System.out.println(" ----  List of appointments by a Year -----");
         countAppointmentByYear() ;
-        System.out.println(" ----  Data Count by Month -----");
+        System.out.println(" ----  List of appointments by a Month -----");
         countAppointmentByMonth();
-        System.out.println(" ----  List of Patients -----");
-      //  countAppointmentByPat();
+        System.out.println(" ----  List of Patient Id's who do not have appointments in the future  -----");
+         countAppointmentByPat();
 
     }
 
@@ -51,9 +51,12 @@ public class WebTest {
         mapdata.forEach((key, value) -> System.out.println( key + " ---- " + value));
     }
 
-//    public void countAppointmentByPat() {
-//        HashMap mapdata = appointmentService.countAppointmentByPat();
-//        mapdata.forEach((key, value) -> System.out.println( key + " ---- " + value));
-//    }
+    public void countAppointmentByPat() {
+        List list = appointmentService.countAppointmentByPat();
+       list.forEach(it->{
+           System.out.println(it);
+               }
+       );
+    }
 
 }
